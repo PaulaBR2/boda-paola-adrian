@@ -48,14 +48,16 @@ body::after {
   border-radius:18px;
   padding:35px 25px;
   box-shadow:0 10px 40px rgba(0,0,0,0.06);
-  position:relative;
 }
 
+/* ✨ NOMBRES MEJORADOS */
 .names {
-  font-family:'Playfair Display',serif;
-  font-size:2.3rem;
+  font-family:'Playfair Display', serif;
+  font-size: clamp(2.6rem, 6vw, 3.2rem);
+  font-weight: 700;
   text-align:center;
   color:var(--navy);
+  line-height:1.2;
 }
 
 .ornament {
@@ -64,9 +66,21 @@ body::after {
   color:var(--soft);
 }
 
-.info,.quote {
+.info {
   text-align:center;
   margin-bottom:20px;
+}
+
+/* ✨ FRASE ELEGANTE */
+.quote {
+  text-align:center;
+  margin-bottom:20px;
+  font-family:'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+  letter-spacing:0.6px;
+  opacity:0.8;
 }
 
 .field {margin-bottom:18px;}
@@ -97,7 +111,11 @@ button {
   transition:0.3s;
 }
 
-/* 🎉 MENSAJE ANIMADO */
+button:disabled {
+  opacity:0.7;
+}
+
+/* 🎉 MENSAJE */
 .success {
   opacity:0;
   transform:translateY(10px);
@@ -111,7 +129,7 @@ button {
   transform:translateY(0);
 }
 
-/* ✔️ CHECK SVG */
+/* ✔️ CHECK */
 .check {
   width:60px;
   height:60px;
@@ -128,9 +146,7 @@ button {
 }
 
 @keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
+  to { stroke-dashoffset: 0; }
 }
 
 .footer {
@@ -153,7 +169,7 @@ button {
   </div>
 
   <div class="quote">
-    - Para que el amor siempre encuentre su rumbo -
+    Para que el amor siempre encuentre su rumbo
   </div>
 
   <form id="form">
@@ -190,16 +206,7 @@ button {
 
   </form>
 
-  <!-- 🎉 MENSAJE -->
-  <div class="success" id="msg">
-    
-    <svg class="check" viewBox="0 0 52 52">
-      <path d="M14 27 L22 35 L38 18"></path>
-    </svg>
-
-    <div>✨ ¡Confirmación enviada! ✨</div>
-
-  </div>
+  <div class="success" id="msg"></div>
 
   <div class="footer">¡Os esperamos!</div>
 
@@ -213,12 +220,12 @@ document.getElementById("form").addEventListener("submit", function(e){
 
   const form = e.target;
   const btn = document.getElementById("btn");
+  const msg = document.getElementById("msg");
 
-  // 🎯 UI inmediata
+  const nombre = form.nombre.value;
+
   btn.textContent = "Enviando...";
   btn.disabled = true;
-
-  document.getElementById("msg").classList.add("show");
 
   const formData = new FormData(form);
 
@@ -226,9 +233,20 @@ document.getElementById("form").addEventListener("submit", function(e){
     method: "POST",
     body: formData,
     mode: "no-cors"
-  });
+  })
+  .then(() => {
 
-  form.reset();
+msg.innerHTML = `
+  <div>✨ ¡Gracias, ${nombre}! ✨</div>
+  <div>Hemos recibido tu confirmación ❤️</div>
+`;
+
+    msg.classList.add("show");
+
+    form.reset();
+
+    btn.textContent = "Enviado ✔️";
+  });
 });
 </script>
 
