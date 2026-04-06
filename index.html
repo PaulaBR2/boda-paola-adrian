@@ -13,141 +13,130 @@
   --beige: #f5efe7;
   --card: #ffffff;
   --navy: #1f2a44;
-  --text: #3a3a3a;
   --soft: #d9d2c8;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* {margin:0;padding:0;box-sizing:border-box;}
 
 body {
-  position: relative;
   font-family: 'Inter', sans-serif;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
+  display:flex;
+  justify-content:center;
+  padding:20px;
 }
 
-/* IMAGEN DE FONDO */
+/* fondo */
 body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: url("cortijo%20terry.jpeg") center/cover no-repeat;
-  z-index: -2;
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("cortijo%20terry.jpeg") center/cover no-repeat;
+  z-index:-2;
 }
-
 body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(245, 239, 231, 0.85);
-  z-index: -1;
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(245,239,231,0.85);
+  z-index:-1;
 }
 
 .container {
-  width: 100%;
-  max-width: 520px;
-  background: var(--card);
-  border-radius: 18px;
-  padding: 35px 25px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
-  position: relative;
-}
-
-.container::before {
-  content: "";
-  position: absolute;
-  inset: 10px;
-  border: 1px solid var(--soft);
-  border-radius: 14px;
-  pointer-events: none;
+  max-width:520px;
+  width:100%;
+  background:var(--card);
+  border-radius:18px;
+  padding:35px 25px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.06);
+  position:relative;
 }
 
 .names {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.3rem;
-  font-weight: 700;
-  text-align: center;
-  color: var(--navy);
+  font-family:'Playfair Display',serif;
+  font-size:2.3rem;
+  text-align:center;
+  color:var(--navy);
 }
 
 .ornament {
-  text-align: center;
-  margin: 10px 0 15px;
-  color: var(--soft);
-  font-size: 1.2rem;
+  text-align:center;
+  margin:10px 0 15px;
+  color:var(--soft);
 }
 
-.info {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #666;
-  line-height: 1.8;
-  margin-bottom: 20px;
+.info,.quote {
+  text-align:center;
+  margin-bottom:20px;
 }
 
-.quote {
-  text-align: center;
-  font-size: 0.85rem;
-  color: #777;
-  font-style: italic;
-  margin-bottom: 30px;
-}
-
-.field {
-  margin-bottom: 18px;
-}
+.field {margin-bottom:18px;}
 
 label {
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  color: var(--navy);
-  display: block;
-  margin-bottom: 6px;
+  font-size:0.75rem;
+  color:var(--navy);
+  display:block;
+  margin-bottom:6px;
 }
 
-input, select, textarea {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #e5e2dd;
-  background: #faf9f7;
-  font-size: 0.9rem;
-}
-
-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='%231f2a44' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  padding-right: 40px;
+input,select,textarea {
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #e5e2dd;
+  background:#faf9f7;
 }
 
 button {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  background: var(--navy);
-  color: white;
-  border-radius: 12px;
-  cursor: pointer;
+  width:100%;
+  padding:14px;
+  border:none;
+  background:var(--navy);
+  color:white;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.3s;
 }
 
+/* 🎉 MENSAJE ANIMADO */
 .success {
-  display: none;
-  text-align: center;
-  margin-top: 15px;
-  color: var(--navy);
+  opacity:0;
+  transform:translateY(10px);
+  text-align:center;
+  margin-top:20px;
+  transition:0.5s ease;
+}
+
+.success.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ✔️ CHECK SVG */
+.check {
+  width:60px;
+  height:60px;
+  margin:10px auto;
+}
+
+.check path {
+  stroke: var(--navy);
+  stroke-width: 3;
+  fill: none;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: draw 0.6s ease forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 .footer {
-  text-align: center;
-  margin-top: 25px;
-  font-size: 0.8rem;
+  text-align:center;
+  margin-top:25px;
+  font-size:0.8rem;
 }
 </style>
 </head>
@@ -194,20 +183,25 @@ button {
 
     <div class="field">
       <label>Alergias</label>
-      <textarea name="alergias" rows="3"></textarea>
+      <textarea name="alergias"></textarea>
     </div>
 
-    <button type="submit">Confirmar asistencia</button>
+    <button type="submit" id="btn">Confirmar asistencia</button>
 
   </form>
 
+  <!-- 🎉 MENSAJE -->
   <div class="success" id="msg">
-    ✨ Gracias por confirmar ✨
+    
+    <svg class="check" viewBox="0 0 52 52">
+      <path d="M14 27 L22 35 L38 18"></path>
+    </svg>
+
+    <div>✨ ¡Confirmación enviada! ✨</div>
+
   </div>
 
-  <div class="footer">
-    ¡Os esperamos!
-  </div>
+  <div class="footer">¡Os esperamos!</div>
 
 </div>
 
@@ -218,21 +212,24 @@ document.getElementById("form").addEventListener("submit", function(e){
   e.preventDefault();
 
   const form = e.target;
+  const btn = document.getElementById("btn");
+
+  // 🎯 UI inmediata
+  btn.textContent = "Enviando...";
+  btn.disabled = true;
+
+  document.getElementById("msg").classList.add("show");
+
   const formData = new FormData(form);
 
   fetch(scriptURL, {
     method: "POST",
-    body: formData
-  })
-  .then(() => {
-    document.getElementById("msg").style.display = "block";
-    form.reset();
-  })
-  .catch(() => {
-    alert("Error al enviar 😢");
+    body: formData,
+    mode: "no-cors"
   });
 
-}); // ✅ ESTO FALTABA
+  form.reset();
+});
 </script>
 
 </body>
