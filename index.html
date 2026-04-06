@@ -36,11 +36,10 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: url(cortijo\ terry.jpeg) center/cover no-repeat;
+  background: url("cortijo%20terry.jpeg") center/cover no-repeat;
   z-index: -2;
 }
 
-/* CAPA SUAVE ENCIMA (efecto elegante) */
 body::after {
   content: "";
   position: fixed;
@@ -118,34 +117,14 @@ input, select, textarea {
   border: 1px solid #e5e2dd;
   background: #faf9f7;
   font-size: 0.9rem;
-  transition: 0.2s;
 }
 
-/* 🔥 SELECT ARREGLADO BIEN */
 select {
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
-  background-color: #faf9f7;
-
   background-image: url("data:image/svg+xml;utf8,<svg fill='%231f2a44' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
   background-position: right 12px center;
-  background-size: 16px;
-
   padding-right: 40px;
-}
-
-/* quitar flecha en IE */
-select::-ms-expand {
-  display: none;
-}
-
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: var(--navy);
-  background: white;
 }
 
 button {
@@ -155,14 +134,7 @@ button {
   background: var(--navy);
   color: white;
   border-radius: 12px;
-  font-size: 0.95rem;
   cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  transform: translateY(-1px);
-  opacity: 0.95;
 }
 
 .success {
@@ -170,15 +142,12 @@ button:hover {
   text-align: center;
   margin-top: 15px;
   color: var(--navy);
-  font-size: 0.9rem;
 }
 
 .footer {
   text-align: center;
   margin-top: 25px;
   font-size: 0.8rem;
-  color: var(--navy);
-  letter-spacing: 1px;
 }
 </style>
 </head>
@@ -188,7 +157,6 @@ button:hover {
 <div class="container">
 
   <div class="names">Paola & Adrián</div>
-
   <div class="ornament">✦</div>
 
   <div class="info">
@@ -203,30 +171,30 @@ button:hover {
 
     <div class="field">
       <label>Nombre completo</label>
-      <input type="text" required>
+      <input type="text" name="nombre" required>
     </div>
 
     <div class="field">
       <label>Asistencia</label>
-      <select required>
+      <select name="asistencia" required>
         <option value="">Seleccionar</option>
-        <option>Sí</option>
-        <option>No</option>
+        <option value="Si">Sí</option>
+        <option value="No">No</option>
       </select>
     </div>
 
     <div class="field">
       <label>Menú</label>
-      <select required>
+      <select name="menu" required>
         <option value="">Seleccionar</option>
-        <option>Carne</option>
-        <option>Pescado</option>
+        <option value="Carne">Carne</option>
+        <option value="Pescado">Pescado</option>
       </select>
     </div>
 
     <div class="field">
       <label>Alergias</label>
-      <textarea rows="3" placeholder="Opcional"></textarea>
+      <textarea name="alergias" rows="3"></textarea>
     </div>
 
     <button type="submit">Confirmar asistencia</button>
@@ -250,12 +218,7 @@ document.getElementById("form").addEventListener("submit", function(e){
   e.preventDefault();
 
   const form = e.target;
-
-  const formData = new FormData();
-  formData.append("nombre", form.querySelector("input").value);
-  formData.append("asistencia", form.querySelectorAll("select")[0].value);
-  formData.append("menu", form.querySelectorAll("select")[1].value);
-  formData.append("alergias", form.querySelector("textarea").value);
+  const formData = new FormData(form);
 
   fetch(scriptURL, {
     method: "POST",
@@ -268,6 +231,8 @@ document.getElementById("form").addEventListener("submit", function(e){
   .catch(() => {
     alert("Error al enviar 😢");
   });
+
+}); // ✅ ESTO FALTABA
 </script>
 
 </body>
