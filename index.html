@@ -246,34 +246,28 @@ button:hover {
 <script>
 const scriptURL = "https://script.google.com/macros/s/AKfycbwTgEG_yvai_0J9pcf7RelffN3BAeqpghJ9H92NtbJwkqgjOJHR5geyJbVYNysarFvv/exec";
 
-document.getElementById("form").addEventListener("submit", async function(e){
+document.getElementById("form").addEventListener("submit", function(e){
   e.preventDefault();
 
   const form = e.target;
 
-  const data = {
-    nombre: form.querySelector("input").value,
-    asistencia: form.querySelectorAll("select")[0].value,
-    menu: form.querySelectorAll("select")[1].value,
-    alergias: form.querySelector("textarea").value
-  };
+  const formData = new FormData();
+  formData.append("nombre", form.querySelector("input").value);
+  formData.append("asistencia", form.querySelectorAll("select")[0].value);
+  formData.append("menu", form.querySelectorAll("select")[1].value);
+  formData.append("alergias", form.querySelector("textarea").value);
 
-  try {
-    await fetch(scriptURL, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-
+  fetch(scriptURL, {
+    method: "POST",
+    body: formData
+  })
+  .then(() => {
     document.getElementById("msg").style.display = "block";
     form.reset();
-
-  } catch (error) {
+  })
+  .catch(() => {
     alert("Error al enviar 😢");
-  }
-});
+  });
 </script>
 
 </body>
