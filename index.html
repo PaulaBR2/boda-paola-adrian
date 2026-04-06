@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Boda - Paola & Adrián</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --beige: #f5efe7;
+  --card: #ffffff;
+  --navy: #1f2a44;
+  --text: #3a3a3a;
+  --soft: #d9d2c8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* IMAGEN DE FONDO */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url(cortijo\ terry.jpeg) center/cover no-repeat;
+  z-index: -2;
+}
+
+/* CAPA SUAVE ENCIMA (efecto elegante) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(245, 239, 231, 0.85);
+  z-index: -1;
+}
+
+.container {
+  width: 100%;
+  max-width: 520px;
+  background: var(--card);
+  border-radius: 18px;
+  padding: 35px 25px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+  position: relative;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid var(--soft);
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+.names {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.3rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--navy);
+}
+
+.ornament {
+  text-align: center;
+  margin: 10px 0 15px;
+  color: var(--soft);
+  font-size: 1.2rem;
+}
+
+.info {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.quote {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #777;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+.field {
+  margin-bottom: 18px;
+}
+
+label {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: var(--navy);
+  display: block;
+  margin-bottom: 6px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e2dd;
+  background: #faf9f7;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+/* 🔥 SELECT ARREGLADO BIEN */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-color: #faf9f7;
+
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%231f2a44' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+
+  padding-right: 40px;
+}
+
+/* quitar flecha en IE */
+select::-ms-expand {
+  display: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--navy);
+  background: white;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background: var(--navy);
+  color: white;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.success {
+  display: none;
+  text-align: center;
+  margin-top: 15px;
+  color: var(--navy);
+  font-size: 0.9rem;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 0.8rem;
+  color: var(--navy);
+  letter-spacing: 1px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="names">Paola & Adrián</div>
+
+  <div class="ornament">✦</div>
+
+  <div class="info">
+    22 de agosto · Cortijo Terry
+  </div>
+
+  <div class="quote">
+    - Para que el amor siempre encuentre su rumbo -
+  </div>
+
+  <form id="form">
+
+    <div class="field">
+      <label>Nombre completo</label>
+      <input type="text" required>
+    </div>
+
+    <div class="field">
+      <label>Asistencia</label>
+      <select required>
+        <option value="">Seleccionar</option>
+        <option>Sí</option>
+        <option>No</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Menú</label>
+      <select required>
+        <option value="">Seleccionar</option>
+        <option>Carne</option>
+        <option>Pescado</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Alergias</label>
+      <textarea rows="3" placeholder="Opcional"></textarea>
+    </div>
+
+    <button type="submit">Confirmar asistencia</button>
+
+  </form>
+
+  <div class="success" id="msg">
+    ✨ Gracias por confirmar ✨
+  </div>
+
+  <div class="footer">
+    ¡Os esperamos!
+  </div>
+
+</div>
+
+<script>
+document.getElementById("form").addEventListener("submit", function(e){
+  e.preventDefault();
+  document.getElementById("msg").style.display = "block";
+  this.reset();
+});
+</script>
+
+</body>
+</html>
